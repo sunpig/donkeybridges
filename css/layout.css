@@ -3,7 +3,7 @@ article,section,header,footer,nav {
     display:block;
 }
 html {
-    background:#000904 url('../img/nasa/sts106-704-092_small.jpg') no-repeat fixed 0 0;
+    background:#000904 url('../img/nasa/sts106-704-092_small.jpg') no-repeat 0 0;
     background-size:100% auto;
 }
 .pageContainer {
