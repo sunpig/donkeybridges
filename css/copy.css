@@ -19,22 +19,11 @@ Notes:
     line-height:1.3;
 }
 .copy p {
-    margin:0.25em 0;
+    margin:1em 0;
 }
 .copy ul > li{
     list-style-type:square;
     margin-left:16px;
-}
-.copy a,
-.copy a:hover {
-    color:inherit;
-    -webkit-transition:background-color 0.3s;
-    -moz-transition:background-color 0.3s;
-    -o-transition:background-color 0.3s;
-    transition:background-color 0.3s;
-}
-.copy a:hover {
-    background-color:#39f;
 }
 .copy .nobr {
     white-space:nowrap;
@@ -50,6 +39,7 @@ Notes:
 .copy-small p,
 .copy-small li {
     font-size:100%;
+    margin:0.25em 0;
 }
 
 /* Centered copy */

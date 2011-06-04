@@ -45,7 +45,7 @@ $viewData = array(
             <section class="mod mod-rm mod-rm-bg1" id="modSearchByPhrase">
                 <div class="inner">
                     <div class="hd">
-                        <h2 class="h2">Or, if you have a <a href="#">link phrase</a>, enter it here</h2>
+                        <h2 class="h2">Or enter a <a href="#">link phrase</a></h2>
                     </div>
                     <div class="bd copy">
                         <form action="resource.php" method="get">

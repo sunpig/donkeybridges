@@ -17,3 +17,16 @@ h1,h2,h3,
 .h1,.h2,.h3 {
     font-family:Museo500,Museo,Helvetica,Arial,sans-serif;
 }
+
+a,
+a:hover {
+    color:inherit;
+}
+a:hover {
+    background-color:#9df;
+    color:#003;
+}
+.linkphrase {
+    background-color:#fc3;
+    color:#009;
+}

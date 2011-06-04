@@ -46,7 +46,7 @@ $viewData = array(
                 <ul>
                     <?php 
                     foreach ($places as $place) {
-                        echo '<li><a href="resource.php?id=' . $place->woeid . '">' . $place->name. '</a> (' . $place->placeTypeName->content . '), country: ' . $place->country->content . ' <span class="mnemonic">' . getPhraseFromMnemonic(getMnemonicFromId($place->woeid)) . '</span></li>';
+                        echo '<li><a href="resource.php?id=' . $place->woeid . '">' . $place->name. '</a> (' . $place->placeTypeName->content . '), country: ' . $place->country->content . '</li>';
                     }
                     ?>
                 </ul>

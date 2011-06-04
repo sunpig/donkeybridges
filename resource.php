@@ -2,6 +2,11 @@
 require_once('lib/words.php');
 require_once('lib/places.php');
 
+$viewData = array(
+    'title' => "Link Phrases demo"
+);
+
+
 $err = "";
 $a1 = $_GET["a1"];
 $n1 = $_GET["n1"];
@@ -32,16 +37,13 @@ if (!$err) {
     $place = null;
     try {
         $place = getPlaceById($id);
+        $viewData['title'] .= ': ' . $place->name;
     } catch (Exception $e) {
         $err = "Error accessing the Yahoo GeoPlanet service";
         // Do something here.
     }
 }
 
-
-$viewData = array(
-    'title' => "Link Phrases demo"
-);
 
 ?>
 
@@ -53,7 +55,7 @@ $viewData = array(
     </div>
 </nav>
 
-<section class="mod mod-rm mod-rm-bg1 size1of1" id="modResource">
+<section class="mod mod-rm mod-rm-bg1" id="modResource">
     <div class="inner">
         <?php if ($err): ?>
             <div class="hd">
@@ -65,7 +67,14 @@ $viewData = array(
                 <h1 class="h2"><a href="resource.php?id=<?php echo $id?>"><?php echo $place->name. ' (' . $place->placeTypeName->content. '), ' . $place->country->content ?></a></h1>
             </div>
             <div class="bd copy">
-                <p>Todo: map</p>
+                <!--
+                <?php echo var_dump($place); ?>
+                -->
+                <p class="infobox">To return to this place page, you can copy the <a href=".">link in the address bar</a>, or
+                you can visit the <a href="index.php">home page</a> and enter the link phrase <span class="linkphrase">"<?php echo getPhraseFromMnemonic(getMnemonicFromId($id))?>"</span>.</p>
+                
+                <div id="map_canvas" style="height:250px;width:100%;"></div>
+                <p><?php echo $place->centroid->latitude ?>, <?php echo $place->centroid->longitude ?></p>
             </div>
 
             <?php else: ?>
@@ -79,5 +88,22 @@ $viewData = array(
         <?php endif ?>
     </div>
 </section>
+
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script>
+    function initMap() {
+        var boundingBoxSW = new google.maps.LatLng(<?php echo $place->boundingBox->southWest->latitude ?>,<?php echo $place->boundingBox->southWest->longitude ?>);
+        var boundingBoxNE = new google.maps.LatLng(<?php echo $place->boundingBox->northEast->latitude ?>,<?php echo $place->boundingBox->northEast->longitude ?>);
+        var boundingBox = new google.maps.LatLngBounds(boundingBoxSW,boundingBoxNE);
+        var centroid = new google.maps.LatLng(<?php echo $place->centroid->latitude ?>, <?php echo $place->centroid->longitude ?>);
+        var opts = {
+            center: centroid,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"), opts);
+        map.fitBounds(boundingBox);
+    }
+    document.onload = initMap();
+</script>
 
 <?php include('partial/_end.php'); ?>
