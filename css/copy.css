@@ -1,0 +1,58 @@
+/*
+HTML structure
+
+    <div class="copy"></div>
+
+Notes:
+  - the copy object is a container for "mostly unstructured"
+    text content. It will typically contain paragraphs, lists, blockquotes, 
+    etc.  The copy is likely to vary over the lifetime of the page, and 
+    will not conform to any predefined structure, but it *should* use proper
+    HTML semantics.
+
+*/
+
+.copy p,
+.copy li {
+    font-family:Museo500,Museo,Helvetica,Arial,sans-serif;
+    font-size:123.1%;
+    line-height:1.3;
+}
+.copy p {
+    margin:0.25em 0;
+}
+.copy ul > li{
+    list-style-type:square;
+    margin-left:16px;
+}
+.copy a,
+.copy a:hover {
+    color:inherit;
+    -webkit-transition:background-color 0.3s;
+    -moz-transition:background-color 0.3s;
+    -o-transition:background-color 0.3s;
+    transition:background-color 0.3s;
+}
+.copy a:hover {
+    background-color:#39f;
+}
+.copy .nobr {
+    white-space:nowrap;
+}
+
+.copy input,
+.copy select {
+    color:#336;
+    font-family:Museo500,Museo,Helvetica,Arial,sans-serif;
+}
+
+/* Small copy */
+.copy-small p,
+.copy-small li {
+    font-size:100%;
+}
+
+/* Centered copy */
+.copy-centered {
+    text-align:center;
+}

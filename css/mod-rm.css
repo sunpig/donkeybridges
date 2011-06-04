@@ -1,8 +1,29 @@
+.mod-rm {
+    border-radius:5px;
+}
 .mod-rm > .inner {
     border:5px transparent;
     margin:10px;
+    padding:1px;
 }
-.mod-rm > .inner > .bd {
-    padding-top:10px;
-    font-size:123.1%;
+.mod-rm > .inner > .hd + .bd {
+    margin-top:1em;
+}
+
+
+.mod-rm-bg1 {
+    background:#def;
+    background:rgba(230,240,255,0.8);
+    border:5px solid rgba(45,90,255,0.6);
+}
+
+.mod-rm-bg2 {
+    background:#036;
+    background:rgba(0,45,90,0.6);
+    border:5px solid rgba(45,90,255,0.6);
+    color:#fff;
+}
+
+.mod-rm-bg3 {
+    background:#fff;
 }

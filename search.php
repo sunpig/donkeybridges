@@ -19,12 +19,18 @@ if (!$err) {
 }
 
 $viewData = array(
-    'title' => "Resource mnemonics (link phrases) demo"
+    'title' => "Link Phrases demo"
 );
 
 ?>
 
 <?php include('partial/_start.php'); ?>
+
+<nav class="mod mod-rm mod-rm-bg3 copy copy-small">
+    <div class="inner">
+        <p><a href="index.php">Home</a> &rarr; Search results</p>
+    </div>
+</nav>
 
 <section class="mod mod-rm mod-rm-bg1" id="modResource">
     <div class="inner">
@@ -36,7 +42,7 @@ $viewData = array(
             <div class="hd">
                 <h1 class="h2">Possible matches:</h1>
             </div>
-            <div class="bd">
+            <div class="bd copy">
                 <ul>
                     <?php 
                     foreach ($places as $place) {

@@ -40,12 +40,18 @@ if (!$err) {
 
 
 $viewData = array(
-    'title' => "Resource mnemonics (link phrases) demo"
+    'title' => "Link Phrases demo"
 );
 
 ?>
 
 <?php include('partial/_start.php'); ?>
+
+<nav class="mod mod-rm mod-rm-bg3 copy copy-small">
+    <div class="inner">
+        <p><a href="index.php">Home</a> &rarr; Search results</p>
+    </div>
+</nav>
 
 <section class="mod mod-rm mod-rm-bg1 size1of1" id="modResource">
     <div class="inner">
@@ -58,14 +64,15 @@ $viewData = array(
             <div class="hd">
                 <h1 class="h2"><a href="resource.php?id=<?php echo $id?>"><?php echo $place->name. ' (' . $place->placeTypeName->content. '), ' . $place->country->content ?></a></h1>
             </div>
-            <div class="bd">
+            <div class="bd copy">
+                <p>Todo: map</p>
             </div>
 
             <?php else: ?>
             <div class="hd">
                 <h1 class="h2">There is no place associated with the phrase "<?php echo getPhraseFromMnemonic(getMnemonicFromId($id))?>".</h1>
             </div>
-            <div class="bd">
+            <div class="bd copy">
                 <p><a href="index.php">Try another</a></p>
             </div>
             <?php endif ?>

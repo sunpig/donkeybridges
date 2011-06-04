@@ -1,12 +1,13 @@
-<!--
-            <footer><div class="footer">
+            <footer class="mod mod-rm mod-rm-bg2">
                 <div class="inner">
-                    <div class="bd">
-                        <h3>Developed by <a href="http://aleona.eu/"><img src="http://aleona.eu/images/logo-black-50y.png" alt="Aleona" style="vertical-align:middle;height:25px;" /></a></h3>
+                    <div class="bd copy copy-small">
+                        <p>Link Phrases ("Resource Mnemonics") demo by <a href="http://sunpig.com/martin/">Martin Sutherland</a> (<a href="http://twitter.com/sunpig">@sunpig</a>)</p>
+                        <p>Source code on <a href="http://github.com/sunpig/rmdemo">Github</a></p>
+                        <p>Background image of the Earth from space: STS106-704-092 NASA/courtesy of <a href="http://nasaimages.org/">nasaimages.org</a></p>
                     </div>
                 </div>
-            </div></footer>
--->
+            </footer>
+
         </div>
 
     </body>

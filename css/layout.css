@@ -3,13 +3,10 @@ article,section,header,footer,nav {
     display:block;
 }
 html {
-    background:#030c07 url('../img/nasa/earth2.jpg') no-repeat 0 0;
+    background:#000904 url('../img/nasa/sts106-704-092_small.jpg') no-repeat 0 0;
     background-size:100% auto;
 }
 .pageContainer {
     margin:1em auto;
     max-width:720px;
-}
-.nobr {
-    white-space:nowrap;
 }
