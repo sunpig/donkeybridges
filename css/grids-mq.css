@@ -1,0 +1,10 @@
+/* OOCSS extention: additional classes for _simple_ adaptive grid layouts */
+
+/* Overrides at breakpoint 720px */
+@media screen and (min-width: 720px) {
+    .size-bp720-1of2 {
+        float:left;
+        width:50%;
+    }
+}
+

@@ -1,0 +1,8 @@
+.mod-rm > .inner {
+    border:5px transparent;
+    margin:10px;
+}
+.mod-rm > .inner > .bd {
+    padding-top:10px;
+    font-size:123.1%;
+}
