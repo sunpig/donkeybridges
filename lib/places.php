@@ -1,19 +1,29 @@
 <?php
 
-function getPlaceById($id){
-    $place = null;
-    $yqlQuery = 'select * from geo.places where woeid=' . $id;
-    $yqlUrl = 'http://query.yahooapis.com/v1/public/yql?format=json&q=' . urlencode($yqlQuery);
+function getPlaceInfoById($id){
+    $placeInfo = null;
+    $yqlQuery= 'select * from query.multi where queries = "'
+      . 'select * from geo.places where woeid = ' . $id
+      . ';select * from geo.places.neighbors where neighbor_woeid = ' . $id
+      . ';select * from flickr.photos.search where has_geo=\'true\' and content_type=1 and media=\'photos\' and license in (4,2,7) and woe_id=' . $id . ' limit 8'
+      . ';select * from flickr.people.info2 where user_id in (select owner from flickr.photos.search where has_geo=\'true\' and content_type=1 and media=\'photos\' and license in (4,2,7) and woe_id=' . $id . ' limit 8)'
+      . '"';
+
+//    $yqlQuery = 'select * from geo.places where woeid=' . $id;
+    $yqlUrl = 'http://query.yahooapis.com/v1/public/yql?format=json&q=' 
+                . urlencode($yqlQuery)
+                . '&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
+                
     $response_json = get($yqlUrl);
     $response_object = json_decode($response_json);
     $query = $response_object->query;
     if ($query) {
         $results = $query->results;
         if ($results) {
-            $place = $results->place;
+            $placeInfo = $results;
         }
     }
-    return $place;
+    return $placeInfo;
 }
 
 function getPlacesByName($placename){
@@ -39,6 +49,18 @@ function getPlacesByName($placename){
     }
 
     return $places;
+}
+
+function formatPlaceWithAdmin1AndCountry($place) {
+    $text = $place->name;
+    if ($place->admin1 && ($place->name != $place->admin1->content)) {
+        $text .= ', ' . $place->admin1->content;
+    }
+    if ($place->country && ($place->name != $place->country->content)) {
+        $text .= ', ' . $place->country->content;
+    }
+
+    return $text;
 }
 
 function get($url){

@@ -1,5 +1,5 @@
 /* html5 layout general */
-article,section,header,footer,nav {
+article,section,header,footer,nav,figure {
     display:block;
 }
 html {

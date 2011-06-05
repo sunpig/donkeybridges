@@ -17,6 +17,10 @@ h1,h2,h3,
 .h1,.h2,.h3 {
     font-family:Museo500,Museo,Helvetica,Arial,sans-serif;
 }
+h4,.h4 {
+    color:#006;
+    font-size:123.1%;
+}
 
 a,
 a:hover {

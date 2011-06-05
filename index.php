@@ -4,10 +4,23 @@ require_once('lib/words.php');
 $adjectives = adjectives();
 $nouns = nouns();
 
-$a1 = getWordFromNumber(rand(0,99), $adjectives);
-$n1 = getWordFromNumber(rand(0,99), $nouns);
-$a2 = getWordFromNumber(rand(0,99), $adjectives);
-$n2 = getWordFromNumber(rand(0,99), $nouns);
+$a1 = $_GET["a1"];
+$n1 = $_GET["n1"];
+$a2 = $_GET["a2"];
+$n2 = $_GET["n2"];
+
+if (getNumberFromWord($a1, $adjectives)==-1) {
+    $a1 = getWordFromNumber(rand(0,99), $adjectives);
+}
+if (getNumberFromWord($n1, $nouns)==-1) {
+    $n1 = getWordFromNumber(rand(0,99), $nouns);
+}
+if (getNumberFromWord($a2, $adjectives)==-1) {
+    $a2 = getWordFromNumber(rand(0,99), $adjectives);
+}
+if (getNumberFromWord($n2, $nouns)==-1) {
+    $n2 = getWordFromNumber(rand(0,99), $nouns);
+}
 
 $a1Options = getOptions($adjectives, $a1);
 $n1Options = getOptions($nouns, $n1);
@@ -23,29 +36,11 @@ $viewData = array(
 <?php include('partial/_start.php'); ?>
 
     <div class="line">
-        <div class="unit size1of1 size-bp720-1of2 h100">
-            <section class="mod mod-rm mod-rm-bg1 h100" id="modSearchByPlace">
-                <div class="inner h100">
-                    <div class="hd">
-                        <h1 class="h2">Search for a place</h1>
-                    </div>
-                    <div class="bd copy h100">
-                        <form action="search.php" method="get">
-                            <p>
-                                <input type="search" id="placename" name="placename" placeholder="Place name" />
-                                <input type="submit" value="Find it!" />
-                            </p>
-                        </form>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div class="unit lastUnit size1of1 size-bp720-1of2">
+        <div class="unit size1of1 size-bp720-1of2">
             <section class="mod mod-rm mod-rm-bg1" id="modSearchByPhrase">
                 <div class="inner">
                     <div class="hd">
-                        <h2 class="h2">Or enter a <a href="#">link phrase</a></h2>
+                        <h2 class="h2">Enter a link phrase</h2>
                     </div>
                     <div class="bd copy">
                         <form action="resource.php" method="get">
@@ -57,13 +52,46 @@ $viewData = array(
                                     <select name="a2"><?php echo $a2Options ?></select>
                                     <select name="n2"><?php echo $n2Options ?></select></span>
                             </p>
+                            <p><input type="submit" value="Take me there!" /></p>
+                            <p>Note: not every phrase has a place associated with it!</p>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="unit lastUnit size1of1 size-bp720-1of2 h100">
+            <section class="mod mod-rm mod-rm-bg1 h100" id="modSearchByPlace">
+                <div class="inner h100">
+                    <div class="hd">
+                        <h1 class="h2">Or try these example phrases:</h1>
+                    </div>
+                    <div class="bd copy h100">
+                        <ul>
+                            <li><a href="resource.php?a1=old&n1=pie&a2=dancing&n2=spoon">An old pie and a dancing spoon</a></li>
+                            <li><a href="resource.php?a1=hairy&n1=moon&a2=strong&n2=nail">A hairy moon and a strong nail</a></li>
+                            <li><a href="resource.php?a1=round&n1=chicken&a2=quiet&n2=wheel">A round chicken and a quiet wheel</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mod mod-rm mod-rm-bg1 h100" id="modSearchByPlace">
+                <div class="inner h100">
+                    <div class="hd">
+                        <h1 class="h2">Or search for a place</h1>
+                    </div>
+                    <div class="bd copy h100">
+                        <form action="search.php" method="get">
                             <p>
-                                <input type="submit" value="Take me there!" />
+                                <input type="search" id="placename" name="placename" placeholder="Place name" />
+                                <input type="submit" value="Find it!" />
                             </p>
                         </form>
                     </div>
                 </div>
             </section>
+
         </div>
 
     </div>

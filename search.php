@@ -46,7 +46,7 @@ $viewData = array(
                 <ul>
                     <?php 
                     foreach ($places as $place) {
-                        echo '<li><a href="resource.php?id=' . $place->woeid . '">' . $place->name. '</a> (' . $place->placeTypeName->content . '), country: ' . $place->country->content . '</li>';
+                        echo '<li><a href="resource.php?id=' . $place->woeid . '">' . formatPlaceWithAdmin1AndCountry($place) . '</a> (' . $place->placeTypeName->content . ')</li>';
                     }
                     ?>
                 </ul>

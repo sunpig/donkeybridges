@@ -34,6 +34,33 @@ Notes:
     color:#336;
     font-family:Museo500,Museo,Helvetica,Arial,sans-serif;
 }
+.copy input[type='submit'] {
+    color:#000;
+}
+.copy input::-webkit-input-placeholder {
+    color:#aaa;
+}
+.copy input:-moz-placeholder {
+   color:#aaa;
+}
+
+.copy figure.flickr {
+    margin:0 0 1em;
+    overflow:hidden;
+    position:relative;
+    text-align:left;
+}
+.copy .flickrthumb {
+    background:rgba(45,90,255,0.6);
+    border-radius:5px;
+    float:left;
+    margin:0 5px 5px 0;
+    padding:5px;
+    vertical-align:middle;
+}
+.copy a.flickrthumb img {
+    display:block;
+}
 
 /* Small copy */
 .copy-small p,
