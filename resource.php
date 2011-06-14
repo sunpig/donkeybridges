@@ -43,6 +43,7 @@ if (!$err) {
         $placeInfo = getPlaceInfoById($id);
         $place = $placeInfo->results[0]->place;
         $viewData['title'] .= ': ' . $place->name;
+        $phrase = getPhraseFromMnemonic(getMnemonicFromId($id));
     } catch (Exception $e) {
         $err = "Error accessing the Yahoo GeoPlanet service";
         // Do something here.
@@ -54,14 +55,14 @@ if (!$err) {
 
 <?php include('partial/_start.php'); ?>
 
-<nav class="mod mod-rm mod-rm-bg3 copy copy-small">
-    <div class="inner">
-        <p><a href="index.php">Home</a> &rarr; Place</p>
+<nav class="mod mod-rm mod-rm-nav copy">
+    <div class="inner mvn mhm">
+        <p class="small"><a href="index.php">Home</a> &rarr; Place</p>
     </div>
 </nav>
 
-<section class="mod mod-rm mod-rm-bg1" id="modResource">
-    <div class="inner">
+<section class="mod mod-rm mod-rm-dark" id="modResource">
+    <div class="inner mam">
         <?php if ($err): ?>
             <div class="hd">
                 <h1 class="h2"><?php echo $err ?></h1>
@@ -89,13 +90,15 @@ if (!$err) {
                 
                 <div class="copy">
                     <p>To return to this place page, enter the link phrase 
-                        <a href="index.php?<?php echo "a1=$a1&n1=$n1&a2=$a2&n2=$n2" ?>" class="linkphrase">"<?php echo getPhraseFromMnemonic(getMnemonicFromId($id))?>"</a> 
+                        <a href="index.php?<?php echo "a1=$a1&n1=$n1&a2=$a2&n2=$n2" ?>" class="linkphrase">"<?php echo $phrase?>"</a> 
                         on the <a href="index.php?<?php echo "a1=$a1&n1=$n1&a2=$a2&n2=$n2" ?>">home page</a>.
                     </p>
                 </div>
 
+                <div id="twitterContainer"></div>
+
                 <?php if ($placeInfo->results[2]): ?>
-                    <h3 class="mtl mbs">Photos on Flickr:</h3>
+                    <h3 class="mtl mbs"><a href="http://creativecommons.org/">Creative Commons</a> licensed photos on <a href="http://www.flickr.com/">Flickr</a>:</h3>
                     <div>
                     <?php 
                     if (count($placeInfo->results[2]->photo) > 1) {
@@ -117,16 +120,16 @@ if (!$err) {
 
                     foreach($placePhotos as $photo) {
                         $photoUrl = 'http://www.flickr.com/photos/' . $photo->owner . '/' . $photo->id;
-                        echo '<figure class="flickr">';
-                        echo '<a href="' . $photoUrl . '" class="flickrthumb"><img src="http://farm' . $photo->farm . '.static.flickr.com/' . $photo->server . '/' . $photo->id . '_' . $photo->secret . '_s.jpg" title="' . $photo->title . '" /></a>';
-                        echo '<figcaption><p><a href="' . $photoUrl . '">' . $photo->title . '</a> by <a href="' . $peopleMap[$photo->owner]->profileurl . '">' . $peopleMap[$photo->owner]->username . '</a></p></figcaption>';
+                        echo '<figure class="media mhn">';
+                        echo '<a href="' . $photoUrl . '" class="img mrm"><img class="flickrthumb" src="http://farm' . $photo->farm . '.static.flickr.com/' . $photo->server . '/' . $photo->id . '_' . $photo->secret . '_s.jpg" title="' . $photo->title . '" /></a>';
+                        echo '<figcaption class="bd mlm"><p><a href="' . $photoUrl . '">' . $photo->title . '</a> by <a href="' . $peopleMap[$photo->owner]->profileurl . '">' . $peopleMap[$photo->owner]->username . '</a></p></figcaption>';
                         echo '</figure>';
                     }
                     ?>
                 </div>
                     <ul>
-                        <li><a href="http://www.flickr.com/places/<?php echo $place->woeid ?>">Flickr photo page for <?php echo $place->name ?></a></li>
-                        <li><a href="http://www.flickr.com/places/info/<?php echo $place->woeid ?>">Flickr Geo Api page for <?php echo $place->name ?></a></li>
+                        <li><a href="http://www.flickr.com/places/<?php echo $place->woeid ?>">See more photos for <?php echo $place->name ?> on Flickr</a></li>
+                        <li><a href="http://www.flickr.com/places/info/<?php echo $place->woeid ?>">See Flickr's geographic info page for <?php echo $place->name ?></a></li>
                     </ul>
                 <?php endif ?>
 
@@ -154,7 +157,7 @@ if (!$err) {
             <?php else: ?>
             <div class="hd">
                 <?php if (isset($a1) && isset($n1) && isset($a2) && isset($n2)): ?>
-                    <h1 class="h2">There is no place associated with the phrase "<?php echo getPhraseFromMnemonic(getMnemonicFromId($id))?>".</h1>
+                    <h1 class="h2">There is no place associated with the phrase "<?php echo $phrase?>".</h1>
                 <?php else: ?>
                     <h1 class="h2">There is no place associated with the WOEID <?php echo $id ?>.</h1>
                 <?php endif ?>
@@ -169,6 +172,34 @@ if (!$err) {
 
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script>
+    function init() {
+        initMap();
+        initTwitterIntents();
+    }
+    
+    function onTweetClick(e) {
+        e = e || window.event
+        var target = e.target || e.srcElement;
+        window.open(target.href, 'intent', windowOptions + ',width=' + width +
+                                           ',height=' + height + ',left=' + left + ',top=' + top);
+        if (window.addEventListener) {
+          window.addEventListener("storage", handle_storage, false);
+        } else {
+          window.attachEvent("onstorage", handle_storage);
+        };
+    }
+    
+    function initTwitterIntents() {
+        var twitterContainer = document.getElementById('twitterContainer');
+        
+        twitterContainer.innerHTML = [
+            '<p>Have you found a cool place, or a particularly interesting link phrase? ',
+            '<a class="tweet" href="http://twitter.com/intent/tweet?',
+            'text=Where in the world is “<?php echo $phrase ?>”? Go to http://donkeybridges.com/ to find out.">',
+            'Tweet it!</a></p>'
+        ].join('');
+    }
+
     function initMap() {
         var mapContainer = document.getElementById('mapContainer');
             boundingBoxSW = new google.maps.LatLng(<?php echo $place->boundingBox->southWest->latitude ?>,<?php echo $place->boundingBox->southWest->longitude ?>),
@@ -197,7 +228,9 @@ if (!$err) {
         map.fitBounds(boundingBox);
         marker.setMap(map);
     }
-    document.onload = initMap();
+    
+    
+    document.onload = init();
 </script>
 
 <?php include('partial/_end.php'); ?>

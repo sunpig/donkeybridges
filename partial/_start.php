@@ -8,8 +8,8 @@
     </head>
     <body class="page">
         <div class="pageContainer">
-            <header class="mod mod-rm mod-rm-bg2">
-                <div class="inner">
+            <header class="mod mod-rm mod-rm-light">
+                <div class="inner mam">
                     <div class="hd">
                         <h1><?php echo $viewData['title'] ?></h1>
                     </div>

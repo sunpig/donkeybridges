@@ -26,14 +26,14 @@ $viewData = array(
 
 <?php include('partial/_start.php'); ?>
 
-<nav class="mod mod-rm mod-rm-bg3 copy copy-small">
-    <div class="inner">
+<nav class="mod mod-rm mod-rm-nav copy">
+    <div class="inner mvn mhm">
         <p><a href="index.php">Home</a> &rarr; Search results</p>
     </div>
 </nav>
 
-<section class="mod mod-rm mod-rm-bg1" id="modResource">
-    <div class="inner">
+<section class="mod mod-rm mod-rm-dark" id="modResource">
+    <div class="inner mam">
         <?php if ($err): ?>
             <div class="hd">
                 <h1 class="h2"><?php echo $err ?></h1>

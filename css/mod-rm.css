@@ -1,26 +1,21 @@
 .mod-rm {
     border-radius:5px;
 }
-.mod-rm > .inner {
-    border:5px transparent;
-    margin:10px;
-    padding:1px;
-}
 
-
-.mod-rm-bg1 {
+.mod-rm-dark {
     background:#def;
     background:rgba(230,240,255,0.8);
     border:5px solid rgba(45,90,255,0.6);
 }
 
-.mod-rm-bg2 {
+.mod-rm-light {
     background:#036;
     background:rgba(0,45,90,0.6);
     border:5px solid rgba(45,90,255,0.6);
     color:#fff;
 }
 
-.mod-rm-bg3 {
+.mod-rm-nav {
     background:#fff;
+    border:5px solid #fff;
 }

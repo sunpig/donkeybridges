@@ -37,14 +37,14 @@ $viewData = array(
 
     <div class="line">
         <div class="unit size1of1 size-bp720-1of2">
-            <section class="mod mod-rm mod-rm-bg1" id="modSearchByPhrase">
-                <div class="inner">
+            <section class="mod mod-rm mod-rm-dark" id="modSearchByPhrase">
+                <div class="inner mam">
                     <div class="hd">
                         <h2 class="h2">Enter a link phrase</h2>
                     </div>
-                    <div class="bd copy">
-                        <form action="resource.php" method="get">
-                            <p class="b">
+                    <div class="bd">
+                        <form action="resource.php" method="get" class="copy">
+                            <p>
                                 <span class="nobr">A 
                                     <select name="a1"><?php echo $a1Options ?></select>
                                     <select name="n1"><?php echo $n1Options ?></select></span>
@@ -60,13 +60,13 @@ $viewData = array(
             </section>
         </div>
 
-        <div class="unit lastUnit size1of1 size-bp720-1of2 h100">
-            <section class="mod mod-rm mod-rm-bg1 h100" id="modSearchByPlace">
-                <div class="inner h100">
+        <div class="unit lastUnit size1of1 size-bp720-1of2">
+            <section class="mod mod-rm mod-rm-dark" id="modSearchByPlace">
+                <div class="inner mam">
                     <div class="hd">
                         <h1 class="h2">Or try these example phrases:</h1>
                     </div>
-                    <div class="bd copy h100">
+                    <div class="bd copy">
                         <ul>
                             <li><a href="resource.php?a1=old&n1=pie&a2=dancing&n2=spoon">An old pie and a dancing spoon</a></li>
                             <li><a href="resource.php?a1=hairy&n1=moon&a2=strong&n2=nail">A hairy moon and a strong nail</a></li>
@@ -76,12 +76,12 @@ $viewData = array(
                 </div>
             </section>
 
-            <section class="mod mod-rm mod-rm-bg1 h100" id="modSearchByPlace">
-                <div class="inner h100">
+            <section class="mod mod-rm mod-rm-dark" id="modSearchByPlace">
+                <div class="inner mam">
                     <div class="hd">
                         <h1 class="h2">Or search for a place</h1>
                     </div>
-                    <div class="bd copy h100">
+                    <div class="bd copy">
                         <form action="search.php" method="get">
                             <p>
                                 <input type="search" id="placename" name="placename" placeholder="Place name" />
