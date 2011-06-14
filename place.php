@@ -2,17 +2,15 @@
 require_once('lib/words.php');
 require_once('lib/places.php');
 
-$viewData = array(
-    'title' => "Link Phrases demo"
-);
+$pageTitle = "Donkey Bridges";
 
 
 $err = "";
-$a1 = $_GET["a1"];
-$n1 = $_GET["n1"];
-$a2 = $_GET["a2"];
-$n2 = $_GET["n2"];
-$id = $_GET["id"];
+$a1 = filter_input(INPUT_GET, "a1", FILTER_SANITIZE_STRING);
+$n1 = filter_input(INPUT_GET, "n1", FILTER_SANITIZE_STRING);
+$a2 = filter_input(INPUT_GET, "a2", FILTER_SANITIZE_STRING);
+$n2 = filter_input(INPUT_GET, "n2", FILTER_SANITIZE_STRING);
+$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 
 if (isset($a1) && isset($n1) && isset($a2) && isset($n2)) {
     $id = getIdFromMnemonic($a1, $n1, $a2, $n2);
@@ -42,7 +40,7 @@ if (!$err) {
     try {
         $placeInfo = getPlaceInfoById($id);
         $place = $placeInfo->results[0]->place;
-        $viewData['title'] .= ': ' . $place->name;
+        $pageTitle .= ': ' . $place->name;
         $phrase = getPhraseFromMnemonic(getMnemonicFromId($id));
     } catch (Exception $e) {
         $err = "Error accessing the Yahoo GeoPlanet service";
@@ -55,13 +53,7 @@ if (!$err) {
 
 <?php include('partial/_start.php'); ?>
 
-<nav class="mod mod-rm mod-rm-nav copy">
-    <div class="inner mvn mhm">
-        <p class="small"><a href="index.php">Home</a> &rarr; Place</p>
-    </div>
-</nav>
-
-<section class="mod mod-rm mod-rm-dark" id="modResource">
+<section class="mod mod-rm mod-rm-light" id="modResource">
     <div class="inner mam">
         <?php if ($err): ?>
             <div class="hd">
@@ -69,36 +61,42 @@ if (!$err) {
             </div>
         <?php else: ?>
             <?php if ($place): ?>
-            <div class="hd">
+            <div class="hd copy">
                 <h1 class="h2"><?php echo $place->name ?></h1>
+                <ul>
                 <?php
                 if ($place->admin2 && ($place->name != $place->admin2->content)) {
-                    echo '<h2 class="h4">' . $place->admin2->type . ': <a href="search.php?placename=' . urlencode($place->admin2->content) . '">' . $place->admin2->content . '</a></h2>';
+                    echo '<li>' . $place->admin2->type . ': <a href="search.php?placename=' . urlencode($place->admin2->content) . '">' . $place->admin2->content . '</a></li>';
                 }
                 if ($place->admin1 && ($place->name != $place->admin1->content)) {
-                    echo '<h2 class="h4">' . $place->admin1->type . ': <a href="search.php?placename=' . urlencode($place->admin1->content) . '">' . $place->admin1->content . '</a></h2>';
+                    echo '<li>' . $place->admin1->type . ': <a href="search.php?placename=' . urlencode($place->admin1->content) . '">' . $place->admin1->content . '</a></li>';
                 }
                 if ($place->country && ($place->name != $place->country->content)) {
-                    echo '<h2 class="h4">' . $place->country->type . ': <a href="search.php?placename=' . urlencode($place->country->content) . '">' . $place->country->content . '</a></h2>';
+                    echo '<li>' . $place->country->type . ': <a href="search.php?placename=' . urlencode($place->country->content) . '">' . $place->country->content . '</a></li>';
                 }
                 ?>
+                </ul>
             </div>
             <div class="bd copy">
                 <!--
                 <?php echo var_dump($placeInfo) ?>
                 -->
                 
-                <div class="copy">
-                    <p>To return to this place page, enter the link phrase 
-                        <a href="index.php?<?php echo "a1=$a1&n1=$n1&a2=$a2&n2=$n2" ?>" class="linkphrase">"<?php echo $phrase?>"</a> 
-                        on the <a href="index.php?<?php echo "a1=$a1&n1=$n1&a2=$a2&n2=$n2" ?>">home page</a>.
-                    </p>
+                <div class="mod mod-rm mod-rm-light">
+                    <div class="inner mhm">
+                        <div class="bd copy">
+                            <p>To return to this place page, enter the link phrase 
+                                <a href="index.php?<?php echo "a1=$a1&n1=$n1&a2=$a2&n2=$n2" ?>" class="linkphrase">"<?php echo $phrase?>"</a> 
+                                on the <a href="index.php?<?php echo "a1=$a1&n1=$n1&a2=$a2&n2=$n2" ?>">home page</a>.
+                            </p>
+                            <div id="twitterContainer"></div>
+                        </div>
+                    </div>
                 </div>
 
-                <div id="twitterContainer"></div>
 
                 <?php if ($placeInfo->results[2]): ?>
-                    <h3 class="mtl mbs"><a href="http://creativecommons.org/">Creative Commons</a> licensed photos on <a href="http://www.flickr.com/">Flickr</a>:</h3>
+                    <h3 class="mtl mbs"><a href="http://creativecommons.org/">Creative Commons</a> licensed photos on <a href="http://www.flickr.com/">Flickr</a></h3>
                     <div>
                     <?php 
                     if (count($placeInfo->results[2]->photo) > 1) {
@@ -136,7 +134,7 @@ if (!$err) {
                 <div id="mapContainer"></div>
 
                 <?php if ($placeInfo->results[1]): ?>
-                    <h3 class="mtl mbs">Nearby places:</h3>
+                    <h3 class="mtl mbs">Some places near <?php echo $place->name ?></h3>
                     <ul>
                         <?php 
                         /* This may be a list or a single item. See http://www.wait-till-i.com/2010/09/22/the-annoying-thing-about-yqls-json-output-and-the-reason-for-it/ */
@@ -146,7 +144,24 @@ if (!$err) {
                             $nearbyPlaces = array($placeInfo->results[1]->place);
                         }
                         foreach($nearbyPlaces as $nearbyPlace) {
-                            echo '<li><a href="resource.php?id=' . $nearbyPlace->woeid . '">' . formatPlaceWithAdmin1AndCountry($nearbyPlace) . '</a></li>';
+                            echo '<li><a href="place.php?id=' . $nearbyPlace->woeid . '">' . formatPlaceWithAdmin1AndCountry($nearbyPlace) . '</a> <span class="small secondary">(' . getPhraseFromMnemonic(getMnemonicFromId($nearbyPlace->woeid)) . ')</span></li>';
+                        }
+                        ?>
+                    </ul>
+                <?php endif ?>
+
+                <?php if ($placeInfo->results[4]): ?>
+                    <h3 class="mtl mbs">Some places in <?php echo $place->name ?></h3>
+                    <ul>
+                        <?php 
+                        /* This may be a list or a single item. See http://www.wait-till-i.com/2010/09/22/the-annoying-thing-about-yqls-json-output-and-the-reason-for-it/ */
+                        if (count($placeInfo->results[4]->place) > 1) {
+                            $childPlaces = $placeInfo->results[4]->place;
+                        } else {
+                            $childPlaces = array($placeInfo->results[4]->place);
+                        }
+                        foreach($childPlaces as $childPlace) {
+                            echo '<li><a href="place.php?id=' . $childPlace->woeid . '">' . formatPlaceWithAdmin1AndCountry($childPlace) . '</a> <span class="small secondary">(' . getPhraseFromMnemonic(getMnemonicFromId($childPlace->woeid)) . ')</span></li>';
                         }
                         ?>
                     </ul>
@@ -177,24 +192,11 @@ if (!$err) {
         initTwitterIntents();
     }
     
-    function onTweetClick(e) {
-        e = e || window.event
-        var target = e.target || e.srcElement;
-        window.open(target.href, 'intent', windowOptions + ',width=' + width +
-                                           ',height=' + height + ',left=' + left + ',top=' + top);
-        if (window.addEventListener) {
-          window.addEventListener("storage", handle_storage, false);
-        } else {
-          window.attachEvent("onstorage", handle_storage);
-        };
-    }
-    
     function initTwitterIntents() {
         var twitterContainer = document.getElementById('twitterContainer');
-        
         twitterContainer.innerHTML = [
-            '<p>Have you found a cool place, or a particularly interesting link phrase? ',
-            '<a class="tweet" href="http://twitter.com/intent/tweet?',
+            '<p>Have you found an interesting place, or a particularly amusing link phrase? ',
+            '<a class="twitter" href="http://twitter.com/intent/tweet?',
             'text=Where in the world is “<?php echo $phrase ?>”? Go to http://donkeybridges.com/ to find out.">',
             'Tweet it!</a></p>'
         ].join('');

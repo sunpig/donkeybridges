@@ -4,10 +4,10 @@ require_once('lib/words.php');
 $adjectives = adjectives();
 $nouns = nouns();
 
-$a1 = $_GET["a1"];
-$n1 = $_GET["n1"];
-$a2 = $_GET["a2"];
-$n2 = $_GET["n2"];
+$a1 = filter_input(INPUT_GET, "a1", FILTER_SANITIZE_STRING);
+$n1 = filter_input(INPUT_GET, "n1", FILTER_SANITIZE_STRING);
+$a2 = filter_input(INPUT_GET, "a2", FILTER_SANITIZE_STRING);
+$n2 = filter_input(INPUT_GET, "n2", FILTER_SANITIZE_STRING);
 
 if (getNumberFromWord($a1, $adjectives)==-1) {
     $a1 = getWordFromNumber(rand(0,99), $adjectives);
@@ -27,9 +27,7 @@ $n1Options = getOptions($nouns, $n1);
 $a2Options = getOptions($adjectives, $a2);
 $n2Options = getOptions($nouns, $n2);
 
-$viewData = array(
-    'title' => "Link Phrases demo"
-);
+$pageTitle = "Donkey Bridges"
 
 ?>
 
@@ -37,13 +35,13 @@ $viewData = array(
 
     <div class="line">
         <div class="unit size1of1 size-bp720-1of2">
-            <section class="mod mod-rm mod-rm-dark" id="modSearchByPhrase">
+            <section class="mod mod-rm mod-rm-light" id="modSearchByPhrase">
                 <div class="inner mam">
                     <div class="hd">
                         <h2 class="h2">Enter a link phrase</h2>
                     </div>
                     <div class="bd">
-                        <form action="resource.php" method="get" class="copy">
+                        <form action="place.php" method="get" class="copy">
                             <p>
                                 <span class="nobr">A 
                                     <select name="a1"><?php echo $a1Options ?></select>
@@ -61,22 +59,22 @@ $viewData = array(
         </div>
 
         <div class="unit lastUnit size1of1 size-bp720-1of2">
-            <section class="mod mod-rm mod-rm-dark" id="modSearchByPlace">
+            <section class="mod mod-rm mod-rm-light" id="modSearchByPlace">
                 <div class="inner mam">
                     <div class="hd">
                         <h1 class="h2">Or try these example phrases:</h1>
                     </div>
                     <div class="bd copy">
                         <ul>
-                            <li><a href="resource.php?a1=old&n1=pie&a2=dancing&n2=spoon">An old pie and a dancing spoon</a></li>
-                            <li><a href="resource.php?a1=hairy&n1=moon&a2=strong&n2=nail">A hairy moon and a strong nail</a></li>
-                            <li><a href="resource.php?a1=round&n1=chicken&a2=quiet&n2=wheel">A round chicken and a quiet wheel</a></li>
+                            <li><a href="place.php?a1=old&n1=pie&a2=dancing&n2=spoon">An old pie and a dancing spoon</a></li>
+                            <li><a href="place.php?a1=short&n1=house&a2=friendly&n2=fork">A short house and a friendly fork</a></li>
+                            <li><a href="place.php?a1=round&n1=chicken&a2=quiet&n2=wheel">A round chicken and a quiet wheel</a></li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <section class="mod mod-rm mod-rm-dark" id="modSearchByPlace">
+            <section class="mod mod-rm mod-rm-light" id="modSearchByPlace">
                 <div class="inner mam">
                     <div class="hd">
                         <h1 class="h2">Or search for a place</h1>

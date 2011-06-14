@@ -3,7 +3,7 @@ require_once('lib/words.php');
 require_once('lib/places.php');
 
 $err = "";
-$placename = $_GET["placename"];
+$placename = filter_input(INPUT_GET, "placename", FILTER_SANITIZE_STRING);
 
 if (!isset($placename)) {
     $err = "You must enter a place name";
@@ -18,21 +18,13 @@ if (!$err) {
     }
 }
 
-$viewData = array(
-    'title' => "Link Phrases demo"
-);
+$pageTitle = "Donkey Bridges: search results";
 
 ?>
 
 <?php include('partial/_start.php'); ?>
 
-<nav class="mod mod-rm mod-rm-nav copy">
-    <div class="inner mvn mhm">
-        <p><a href="index.php">Home</a> &rarr; Search results</p>
-    </div>
-</nav>
-
-<section class="mod mod-rm mod-rm-dark" id="modResource">
+<section class="mod mod-rm mod-rm-light" id="modResource">
     <div class="inner mam">
         <?php if ($err): ?>
             <div class="hd">
@@ -40,13 +32,13 @@ $viewData = array(
             </div>
         <?php else: ?>
             <div class="hd">
-                <h1 class="h2">Possible matches:</h1>
+                <h1 class="h2">Possible matches for “<?php echo $places[0]->name ?>”:</h1>
             </div>
             <div class="bd copy">
                 <ul>
                     <?php 
                     foreach ($places as $place) {
-                        echo '<li><a href="resource.php?id=' . $place->woeid . '">' . formatPlaceWithAdmin1AndCountry($place) . '</a> (' . $place->placeTypeName->content . ')</li>';
+                        echo '<li><a href="place.php?id=' . $place->woeid . '">' . formatPlaceWithAdmin1AndCountry($place) . '</a> (' . $place->placeTypeName->content . ')</li>';
                     }
                     ?>
                 </ul>

@@ -4,12 +4,12 @@ function getPlaceInfoById($id){
     $placeInfo = null;
     $yqlQuery= 'select * from query.multi where queries = "'
       . 'select * from geo.places where woeid = ' . $id
-      . ';select * from geo.places.neighbors where neighbor_woeid = ' . $id
-      . ';select * from flickr.photos.search where has_geo=\'true\' and content_type=1 and media=\'photos\' and license in (4,2,7) and woe_id=' . $id . ' limit 8'
-      . ';select * from flickr.people.info2 where user_id in (select owner from flickr.photos.search where has_geo=\'true\' and content_type=1 and media=\'photos\' and license in (4,2,7) and woe_id=' . $id . ' limit 8)'
+      . ';select * from geo.places.neighbors(10) where neighbor_woeid = ' . $id
+      . ';select * from flickr.photos.search(8) where has_geo=\'true\' and content_type=1 and media=\'photos\' and license in (4,2,7) and woe_id=' . $id . ' limit 8'
+      . ';select * from flickr.people.info2(8) where user_id in (select owner from flickr.photos.search(8) where has_geo=\'true\' and content_type=1 and media=\'photos\' and license in (4,2,7) and woe_id=' . $id . ')'
+      . ';select * from geo.places.children(10) where parent_woeid = ' . $id
       . '"';
 
-//    $yqlQuery = 'select * from geo.places where woeid=' . $id;
     $yqlUrl = 'http://query.yahooapis.com/v1/public/yql?format=json&q=' 
                 . urlencode($yqlQuery)
                 . '&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
@@ -38,7 +38,7 @@ function getPlacesByName($placename){
             // Handle no results
         } else if ($query->count == 1) {
             // Redirect to result
-            header("Location: resource.php?id=" . $query->results->place->woeid);
+            header("Location: place.php?id=" . $query->results->place->woeid);
             exit;            
         } else {
             $results = $query->results;
