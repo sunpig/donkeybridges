@@ -86,7 +86,10 @@ if (!$err) {
                                 <a href="index.php?<?php echo "a1=$a1&amp;n1=$n1&amp;a2=$a2&amp;n2=$n2" ?>" class="linkphrase">"<?php echo $phrase?>"</a> 
                                 on the <a href="index.php?<?php echo "a1=$a1&amp;n1=$n1&amp;a2=$a2&amp;n2=$n2" ?>">home page</a>.
                             </p>
-                            <div id="twitterContainer"></div>
+                            <p>
+                                Have you found an interesting place, or a particularly amusing link phrase? 
+                                <a class="twitter" href="http://twitter.com/intent/tweet?text=<?php echo urlencode('Where in the world is “' . $phrase . '”? Go to http://donkeybridges.com/ to find out.') ?>">Tweet it!</a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -184,21 +187,6 @@ if (!$err) {
 
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script>
-    function init() {
-        initMap();
-        initTwitterIntents();
-    }
-    
-    function initTwitterIntents() {
-        var twitterContainer = document.getElementById('twitterContainer');
-        twitterContainer.innerHTML = [
-            '<p>Have you found an interesting place, or a particularly amusing link phrase? ',
-            '<a class="twitter" href="http://twitter.com/intent/tweet?',
-            'text=Where in the world is “<?php echo $phrase ?>”? Go to http://donkeybridges.com/ to find out.">',
-            'Tweet it!</a></p>'
-        ].join('');
-    }
-
     function initMap() {
         var mapContainer = document.getElementById('mapContainer');
             boundingBoxSW = new google.maps.LatLng(<?php echo $place->boundingBox->southWest->latitude ?>,<?php echo $place->boundingBox->southWest->longitude ?>),
@@ -229,7 +217,7 @@ if (!$err) {
     }
     
     
-    document.onload = init();
+    document.onload = initMap();
 </script>
 
 <?php include('partial/_end.php'); ?>
