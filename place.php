@@ -53,7 +53,7 @@ if (!$err) {
 
 <?php include('partial/_start.php'); ?>
 
-<section class="mod mod-rm mod-rm-light" id="modResource">
+<section class="mod mod-rm mod-rm-light">
     <div class="inner mam">
         <?php if ($err): ?>
             <div class="hd">
@@ -78,16 +78,13 @@ if (!$err) {
                 </ul>
             </div>
             <div class="bd copy">
-                <!--
-                <?php echo var_dump($placeInfo) ?>
-                -->
                 
                 <div class="mod mod-rm mod-rm-light">
                     <div class="inner mhm">
                         <div class="bd copy">
                             <p>To return to this place page, enter the link phrase 
-                                <a href="index.php?<?php echo "a1=$a1&n1=$n1&a2=$a2&n2=$n2" ?>" class="linkphrase">"<?php echo $phrase?>"</a> 
-                                on the <a href="index.php?<?php echo "a1=$a1&n1=$n1&a2=$a2&n2=$n2" ?>">home page</a>.
+                                <a href="index.php?<?php echo "a1=$a1&amp;n1=$n1&amp;a2=$a2&amp;n2=$n2" ?>" class="linkphrase">"<?php echo $phrase?>"</a> 
+                                on the <a href="index.php?<?php echo "a1=$a1&amp;n1=$n1&amp;a2=$a2&amp;n2=$n2" ?>">home page</a>.
                             </p>
                             <div id="twitterContainer"></div>
                         </div>

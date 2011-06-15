@@ -35,7 +35,7 @@ $pageTitle = "Donkey Bridges"
 
     <div class="line">
         <div class="unit size1of1 size-bp720-1of2">
-            <section class="mod mod-rm mod-rm-light" id="modSearchByPhrase">
+            <section class="mod mod-rm mod-rm-light">
                 <div class="inner mam">
                     <div class="hd">
                         <h2 class="h2">Enter a link phrase</h2>
@@ -51,7 +51,7 @@ $pageTitle = "Donkey Bridges"
                                     <select name="n2"><?php echo $n2Options ?></select></span>
                             </p>
                             <p><input type="submit" value="Take me there!" /></p>
-                            <p>Note: not every phrase has a place associated with it!</p>
+                            <p>Note: not every phrase has a place associated with it! <span class="secondary">The probability of finding a place with a random phrase is about 1 in 20.</span></p>
                         </form>
                     </div>
                 </div>
@@ -59,22 +59,22 @@ $pageTitle = "Donkey Bridges"
         </div>
 
         <div class="unit lastUnit size1of1 size-bp720-1of2">
-            <section class="mod mod-rm mod-rm-light" id="modSearchByPlace">
+            <section class="mod mod-rm mod-rm-light">
                 <div class="inner mam">
                     <div class="hd">
                         <h1 class="h2">Or try these example phrases:</h1>
                     </div>
                     <div class="bd copy">
                         <ul>
-                            <li><a href="place.php?a1=old&n1=pie&a2=dancing&n2=spoon">An old pie and a dancing spoon</a></li>
-                            <li><a href="place.php?a1=short&n1=house&a2=friendly&n2=fork">A short house and a friendly fork</a></li>
-                            <li><a href="place.php?a1=round&n1=chicken&a2=quiet&n2=wheel">A round chicken and a quiet wheel</a></li>
+                            <li><a href="place.php?a1=old&amp;n1=pie&amp;a2=dancing&amp;n2=spoon">An old pie and a dancing spoon</a></li>
+                            <li><a href="place.php?a1=short&amp;n1=house&amp;a2=friendly&amp;n2=fork">A short house and a friendly fork</a></li>
+                            <li><a href="place.php?a1=round&amp;n1=chicken&amp;a2=quiet&amp;n2=wheel">A round chicken and a quiet wheel</a></li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <section class="mod mod-rm mod-rm-light" id="modSearchByPlace">
+            <section class="mod mod-rm mod-rm-light">
                 <div class="inner mam">
                     <div class="hd">
                         <h1 class="h2">Or search for a place</h1>

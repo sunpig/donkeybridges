@@ -24,7 +24,7 @@ $pageTitle = "Donkey Bridges: search results";
 
 <?php include('partial/_start.php'); ?>
 
-<section class="mod mod-rm mod-rm-light" id="modResource">
+<section class="mod mod-rm mod-rm-light">
     <div class="inner mam">
         <?php if ($err): ?>
             <div class="hd">
