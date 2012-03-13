@@ -2,7 +2,7 @@
 
 function getPlaceInfoById($id){
     $placeInfo = null;
-    $yqlQuery= 'select * from query.multi where queries = "'
+    $yqlQuery= 'select * from yql.query.multi where queries = "'
       . 'select * from geo.places where woeid = ' . $id
       . ';select * from geo.places.neighbors(10) where neighbor_woeid = ' . $id
       . ';select * from flickr.photos.search(8) where has_geo=\'true\' and content_type=1 and media=\'photos\' and license in (4,2,7) and woe_id=' . $id . ' limit 8'
@@ -13,7 +13,7 @@ function getPlaceInfoById($id){
     $yqlUrl = 'http://query.yahooapis.com/v1/public/yql?format=json&q=' 
                 . urlencode($yqlQuery)
                 . '&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
-                
+
     $response_json = get($yqlUrl);
     $response_object = json_decode($response_json);
     $query = $response_object->query;
