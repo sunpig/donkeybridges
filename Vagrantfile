@@ -12,8 +12,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.customize ["modifyvm", :id, "--memory", "768"]
   end
 
-  # Forward localhost:8080 on host to port 80 on guest
-  config.vm.network "forwarded_port", guest: 80, host: 8080
+  # Forward localhost:8081 on host to port 80 on guest
+  config.vm.network "forwarded_port", guest: 80, host: 8081
   
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "cookbooks"

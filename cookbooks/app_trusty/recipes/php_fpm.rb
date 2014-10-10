@@ -17,6 +17,8 @@ apt_packages.each do |pkg|
 end
 
 service "php5-fpm" do
+  # See http://matthewcmcmillan.blogspot.nl/2014/06/ubuntu-1404-init-scripts-fail-and-throw.html
+  provider Chef::Provider::Service::Upstart
   supports :start => true, :stop => true, :restart => true
   action :nothing
 end
