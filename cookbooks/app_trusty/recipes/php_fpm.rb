@@ -8,7 +8,8 @@ apt_packages = [
   "php5-cli",
   "php5-mysql",
   "php5-memcache",
-  "php5-fpm"
+  "php5-fpm",
+  "php5-curl"
 ]
 apt_packages.each do |pkg|
   apt_package pkg do
