@@ -1,0 +1,3 @@
+<?php
+$FLICKR_API_KEY="c20c2458fefa281670d93dc990100866"
+?>

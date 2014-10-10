@@ -1,12 +1,12 @@
 <?php
-
 function getPlaceInfoById($id){
     $placeInfo = null;
+    $flickr_api_key = "c20c2458fefa281670d93dc990100866";
     $yqlQuery= 'select * from yql.query.multi where queries = "'
       . 'select * from geo.places where woeid = ' . $id
       . ';select * from geo.places.neighbors(10) where neighbor_woeid = ' . $id
-      . ';select * from flickr.photos.search(8) where has_geo=\'true\' and content_type=1 and media=\'photos\' and license in (4,2,7) and woe_id=' . $id . ' limit 8'
-      . ';select * from flickr.people.info2(8) where user_id in (select owner from flickr.photos.search(8) where has_geo=\'true\' and content_type=1 and media=\'photos\' and license in (4,2,7) and woe_id=' . $id . ')'
+      . ';select * from flickr.photos.search(8) where has_geo=\'true\' and content_type=1 and media=\'photos\' and license in (4,2,7) and woe_id=' . $id . ' and api_key=\'' . $flickr_api_key . '\' limit 8'
+      . ';select * from flickr.people.info2(8) where api_key=\'' . $flickr_api_key .'\' and user_id in (select owner from flickr.photos.search(8) where has_geo=\'true\' and content_type=1 and media=\'photos\' and license in (4,2,7) and woe_id=' . $id . ' and api_key=\'' . $flickr_api_key . '\')'
       . ';select * from geo.places.children(10) where parent_woeid = ' . $id
       . '"';
 

@@ -1,0 +1,13 @@
+server {
+  listen 80 default_server;
+
+  root /vagrant/app;
+  index index.php index.html;
+
+  location ~ \.php$ {
+    fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+    fastcgi_pass unix:/var/run/php5-fpm.socket;
+    include fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME /vagrant/app$fastcgi_script_name;
+   }
+}

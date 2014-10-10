@@ -1,0 +1,8 @@
+export ARCHFLAGS='-arch x86_64'
+export LSCOLORS=dxfxcxdxbxegedabagacad
+
+alias ls="ls -G"
+alias la='ls -al'
+
+alias kickphp='sudo service php5-fpm restart'
+alias kicknginx='sudo service nginx restart'
